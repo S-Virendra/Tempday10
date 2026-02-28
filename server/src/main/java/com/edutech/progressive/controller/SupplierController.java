@@ -7,11 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/supplier")
 public class SupplierController {
+    
 
     private final SupplierServiceImplJpa jpaService;
     private final SupplierServiceImplArraylist arrayListService;
@@ -73,19 +75,26 @@ public class SupplierController {
 
     // ---------- ARRAYLIST ENDPOINTS ----------
 
-    // @GetMapping("/fromArrayList")
-    // public ResponseEntity<List<Supplier>> getAllSuppliersFromArrayList() {
-    //     return ResponseEntity.ok(arrayListService.getAllSuppliers());
-    // }
+    @GetMapping("/fromArrayList")
+    public ResponseEntity<List<Supplier>> getAllSuppliersFromArrayList() {
+        return ResponseEntity.ok(arrayListService.getAllSuppliers());
+    }
 
-    // @PostMapping("/toArrayList")
-    // public ResponseEntity<Integer> addSupplierToArrayList(@RequestBody Supplier supplier) {
-    //     int size = arrayListService.addSupplier(supplier);
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(size);
-    // }
+    @PostMapping("/toArrayList")
+    public ResponseEntity<Integer> addSupplierToArrayList(@RequestBody Supplier supplier) throws SQLException {
+        int size;
+        try {
+            size = arrayListService.addSupplier(supplier);
+             return ResponseEntity.status(HttpStatus.CREATED).body(size);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            throw new SQLException();
+        }
+       
+    }
 
-    // @GetMapping("/fromArrayList/all")
-    // public ResponseEntity<List<Supplier>> getAllSuppliersSortedByNameFromArrayList() {
-    //     return ResponseEntity.ok(arrayListService.getAllSuppliersSortedByName());
-    // }
+    @GetMapping("/fromArrayList/all")
+    public ResponseEntity<List<Supplier>> getAllSuppliersSortedByNameFromArrayList() {
+        return ResponseEntity.ok(arrayListService.getAllSuppliersSortedByName());
+    }
 }

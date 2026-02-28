@@ -7,6 +7,9 @@ import com.edutech.progressive.service.ProductService;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ProductServiceImplJdbc implements ProductService {
 
     private ProductDAO productDAO;

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class WarehouseServiceImplArraylist implements WarehouseService {
 
     private static List<Warehouse> warehouseList = new ArrayList<>();
@@ -25,41 +29,13 @@ public class WarehouseServiceImplArraylist implements WarehouseService {
 
     @Override
     public List<Warehouse> getWarehousesSortedByCapacity() {
-        List<Warehouse> sortedList = new ArrayList<>(warehouseList);
-        sortedList.sort(Comparator.comparing(Warehouse::getCapacity));
-        return sortedList;
+        List<Warehouse> sortedWarehouses = warehouseList;
+        sortedWarehouses.sort(Comparator.comparing(Warehouse::getCapacity)); // Sort by supplier name
+        return sortedWarehouses;
     }
 
     @Override
     public void emptyArrayList() {
-        warehouseList.clear();
+        warehouseList = new ArrayList<>();
     }
-
-    // ---- Placeholder / unused methods ----
-
-    @Override
-    public void updateWarehouse(Warehouse warehouse) {
-        // not required for ArrayList version
-    }
-
-    @Override
-    public void deleteWarehouse(int warehouseId) {
-        // not required for ArrayList version
-    }
-
-    @Override
-    public Warehouse getWarehouseById(int warehouseId) {
-        return null;
-    }
-
-    @Override
-    public List<Warehouse> getWarehouseBySupplier(int supplierId) {
-        return null;
-    }
-
-    // @Override
-    // public List<Warehouse> getWarehousesSortedByName() throws SQLException {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'getWarehousesSortedByName'");
-    // }
 }

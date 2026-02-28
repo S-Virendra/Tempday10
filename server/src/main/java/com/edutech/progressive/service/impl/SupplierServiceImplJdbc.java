@@ -8,8 +8,12 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 
-public class SupplierServiceImplJdbc implements SupplierService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+public class SupplierServiceImplJdbc implements SupplierService {
+   
     private SupplierDAO supplierDAO;
 
     public SupplierServiceImplJdbc(SupplierDAO supplierDAO) {

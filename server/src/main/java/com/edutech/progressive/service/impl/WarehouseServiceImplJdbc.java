@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class WarehouseServiceImplJdbc implements WarehouseService {
 
     private WarehouseDAO warehouseDAO;
@@ -23,9 +27,16 @@ public class WarehouseServiceImplJdbc implements WarehouseService {
 
     @Override
     public int addWarehouse(Warehouse warehouse) throws SQLException {
-        int id = warehouseDAO.addWarehouse(warehouse);
-        warehouse.setWarehouseId(id); // REQUIRED
-        return id;
+        return warehouseDAO.addWarehouse(warehouse);
+    }
+
+    @Override
+    public List<Warehouse> getWarehousesSortedByCapacity() throws SQLException {
+        List<Warehouse> sortedWarehouse = warehouseDAO.getAllWarehouse();
+        if (sortedWarehouse != null) {
+            sortedWarehouse.sort(Comparator.comparingInt(Warehouse::getCapacity)); // Sort by capacity
+        }
+        return sortedWarehouse;
     }
 
     @Override
@@ -41,12 +52,5 @@ public class WarehouseServiceImplJdbc implements WarehouseService {
     @Override
     public Warehouse getWarehouseById(int warehouseId) throws SQLException {
         return warehouseDAO.getWarehouseById(warehouseId);
-    }
-
-    @Override
-    public List<Warehouse> getWarehousesSortedByCapacity() throws SQLException {
-        List<Warehouse> warehouses = warehouseDAO.getAllWarehouse();
-        warehouses.sort(Comparator.comparingInt(Warehouse::getCapacity)); // ASCENDING
-        return warehouses;
     }
 }
