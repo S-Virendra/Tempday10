@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
+// import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Supplier } from "../types/Supplier";
@@ -10,7 +10,7 @@ import { Product } from "../types/Product";
   providedIn: "root",
 })
 export class SupplyLinkService {
-  private baseUrl = `${environment.apiUrl}`;
+  // private baseUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) { }
 
