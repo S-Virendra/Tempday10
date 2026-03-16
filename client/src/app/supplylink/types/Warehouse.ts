@@ -19,10 +19,10 @@ export class Warehouse {
     this.capacity = capacity;
   }
 
-  displayInfo() {
-    // Exact labels required by tests
-    console.log(`Warehouse ID: ${this.warehouseId}`);
-    console.log(`Supplier ID: ${this.supplierId}`);
-    console.log(`Capacity: ${this.capacity}`);
-  }
+  // displayInfo() {
+  //   // Exact labels required by tests
+  //   console.log(`Warehouse ID: ${this.warehouseId}`);
+  //   console.log(`Supplier ID: ${this.supplierId}`);
+  //   console.log(`Capacity: ${this.capacity}`);
+  // }
 }
